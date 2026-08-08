@@ -1,6 +1,6 @@
 <h1>GG's Walltaker Widget (for Android)</h1>
 
-<p>This is a Walltaker client for android that allows you to create widgets that display the wallpaper images from your link id. Supports Android version 12L and up.</p>
+<p>This is a Walltaker client for android that allows you to create widgets that display the wallpaper images from your link id. Supports Android version 12 and up.</p>
 
 <h1>How To Install</h1>
 

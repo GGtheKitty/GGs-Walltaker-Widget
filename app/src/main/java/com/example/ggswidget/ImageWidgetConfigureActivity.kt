@@ -1,14 +1,10 @@
 package com.example.ggswidget
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.os.PowerManager
-import android.provider.Settings
 import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
@@ -33,6 +29,8 @@ class ImageWidgetConfigureActivity : Activity() {
         val widgetLinkID = appWidgetLinkId.text.toString()
         saveTitlePref(context, appWidgetId, widgetLinkID)
 
+        WalltakerWebSocketService.start(context)
+
         // It is the responsibility of the configuration activity to update the app widget
         val appWidgetManager = AppWidgetManager.getInstance(context)
         updateAppWidget(context, appWidgetManager, appWidgetId)
@@ -45,24 +43,8 @@ class ImageWidgetConfigureActivity : Activity() {
     }
     private lateinit var binding: ImageWidgetConfigureBinding
 
-    fun isIgnoringBatteryOptimizations(context: Context): Boolean {
-        val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
-        return powerManager.isIgnoringBatteryOptimizations(context.packageName)
-    }
-
-    @SuppressLint("BatteryLife")
-    fun requestBatteryOptimizationExemption(context: Context) {
-        if (!isIgnoringBatteryOptimizations(context)) {
-            val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).apply {
-                data = Uri.parse("package:${context.packageName}")
-            }
-            context.startActivity(intent)
-        }
-    }
-
     public override fun onCreate(icicle: Bundle?) {
         super.onCreate(icicle)
-        requestBatteryOptimizationExemption(this)
 
         // Set the result to CANCELED.  This will cause the widget host to cancel
         // out of the widget placement if the user presses the back button.
@@ -124,6 +106,6 @@ internal fun saveCheckedPref(context: Context, appWidgetId: Int, value: Int) {
 // If there is no preference saved, get the default from a resource
 internal fun loadCheckedPref(context: Context, appWidgetId: Int): Int {
     val prefs = context.getSharedPreferences(PREFS_NAME, 0)
-    val checkedValue = prefs.getInt(PREF_CHECKED_KEY + appWidgetId, appWidgetId)
+    val checkedValue = prefs.getInt(PREF_CHECKED_KEY + appWidgetId, 0)
     return checkedValue
 }

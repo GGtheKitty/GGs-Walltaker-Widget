@@ -1,27 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Walltaker Widget</string>
-    <string name="appwidget_text">XXXXX</string>
-    <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
-    <string name="configure">Configure</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+  <string name="app_name">Walltaker Widget</string>
+  <string name="appwidget_text">XXXXX</string>
+  <string name="add_widget">Add widget</string>
+  <string name="app_widget_description">This is an app widget description</string>
+  <string name="configure">Configure</string>
+  <!-- Preference Titles -->
+  <string name="messages_header">Messages</string>
+  <string name="sync_header">Sync</string>
+  <!-- Messages Preferences -->
+  <string name="signature_title">Your signature</string>
+  <string name="reply_title">Default reply action</string>
+  <!-- Sync Preferences -->
+  <string name="sync_title">Sync email periodically</string>
+  <string name="attachment_title">Download incoming attachments</string>
+  <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="general_header">General</string>
-    <string name="update_title">Update Interval in Seconds (Cannot be less than 10 seconds)</string>
-    <string name="instructions">Instructions</string>
-    <string name="instructionslist">1. Add the Walltaker Widget to your home screen\n2. Enter your Link ID\n3. … \n4. Profit!\n\n\nOpen the link url by tapping on the widget\n\nYou can also change the amount of time it takes the widget to update using the wrench button\n\nMade by GGnoRE432</string>
-    <string name="crop_to_fill">Crop to Fill</string>
-    <string name="linkid">Link ID\nExample: https://walltaker.joi.how/links/\"XXXXX\"</string>
+  <string name="attachment_summary_off">Only download attachments when manually requested</string>
+  <string name="general_header">General</string>
+  <string name="walltaker_url_title">Walltaker URL</string>
+  <string name="default_walltaker_url">https://walltaker.joi.how</string>
+  <string name="instructions">Instructions</string>
+  <string name="instructionslist">1. Add the Walltaker Widget to your home screen\n2. Enter your Link ID\n3. ... \n4. Profit!\n\n\nOpen the link URL by tapping on the widget\n\nYou can change the Walltaker URL using the wrench button\n\nMade by GGnoRE432</string>
+  <string name="crop_to_fill">Crop to Fill</string>
+  <string name="linkid">Link ID\nUse the value after https://walltaker.joi.how/links/</string>
+  <string name="link_id_hint">Link ID</string>
+  <string name="current_walltaker_image">Current Walltaker image</string>
+  <string name="download_image">Download Image</string>
+  <string name="save_widget_settings">Save Widget Settings</string>
+  <string name="reaction_message_hint">Message</string>
+  <string name="reaction_hate_it">Hate it</string>
+  <string name="reaction_love_it">Love it</string>
+  <string name="reaction_came">Came</string>
+  <string name="api_key_setting_title">API key</string>
+  <string name="api_key_setting_summary">Required for sending reactions</string>
+  <string name="api_key_required">API Key Required</string>
+  <string name="reaction_ok">OK</string>
+  <string name="reaction_disgust_icon">😞</string>
+  <string name="reaction_ok_icon">👍</string>
+  <string name="reaction_horny_icon">😍</string>
+  <string name="reaction_came_icon">💦</string>
 </resources>

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"
-        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +24,19 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".FullscreenImageActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:taskAffinity="com.example.ggswidget.widget"
+            android:theme="@style/Theme.GGsWidget.Fullscreen" />
+        <activity
+            android:name=".WidgetDetailActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:taskAffinity="com.example.ggswidget.widget" />
+        <activity
             android:name=".MainActivity"
+            android:clearTaskOnLaunch="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +48,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <service
+            android:name=".WalltakerWebSocketService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
 
         <receiver
             android:name=".ImageWidget"

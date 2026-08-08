@@ -6,12 +6,9 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
+import android.net.Uri
 import android.util.Log
 import android.widget.RemoteViews
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.AppWidgetTarget
-import com.bumptech.glide.request.transition.Transition
 
 class ImageWidget : AppWidgetProvider() {
 
@@ -25,12 +22,14 @@ class ImageWidget : AppWidgetProvider() {
         WalltakerWebSocketService.start(context)
         // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId)
+            updateAppWidget(context, appWidgetId)
         }
     }
 
     override fun onDeleted(context: Context, appWidgetIds: IntArray) {
         // When the user deletes the widget, delete the preference associated with it.
+        GifWidgetAnimator.stop(appWidgetIds)
+        VideoWidgetAnimator.stop(appWidgetIds)
         Preferences.deletePrefs(context, appWidgetIds)
         WalltakerWebSocketService.start(context)
     }
@@ -43,6 +42,8 @@ class ImageWidget : AppWidgetProvider() {
 
     override fun onDisabled(context: Context) {
         // Enter relevant functionality for when the last widget is disabled
+        GifWidgetAnimator.stopAll()
+        VideoWidgetAnimator.stopAll()
         WalltakerWebSocketService.stop(context)
     }
 
@@ -61,7 +62,6 @@ class ImageWidget : AppWidgetProvider() {
 
 internal fun updateAppWidget(
     context: Context,
-    appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
     val cropImage = loadCheckedPref(context, appWidgetId)
@@ -72,29 +72,17 @@ internal fun updateAppWidget(
         views = RemoteViews(context.packageName, R.layout.image_widget_cropped)
     }
 
-    val awt: AppWidgetTarget = object : AppWidgetTarget(context.applicationContext, R.id.imageView2, views, appWidgetId) {
-        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-            super.onResourceReady(resource, transition)
-        }
-    }
-
-    Glide.with(context.applicationContext)
-        .asBitmap()
-        .override(1900,1900)
-        .fitCenter()
-        .load(Preferences.loadCurrentImgPref(context, appWidgetId))
-        .into(awt)
-
     setClickable(context, views, appWidgetId)
 
-    // Instruct the widget manager to update the widget
-    appWidgetManager.updateAppWidget(appWidgetId, views)
+    ImageLookup.setImage(context, appWidgetId, views)
 }
 
 fun setClickable(context: Context, views: RemoteViews, appWidgetId: Int) {
     val intent = Intent(context, WidgetDetailActivity::class.java)
+    intent.action = "${context.packageName}.OPEN_WIDGET_DETAIL"
+    intent.data = Uri.parse("ggswidget://widget/$appWidgetId")
     intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
 
     val pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 

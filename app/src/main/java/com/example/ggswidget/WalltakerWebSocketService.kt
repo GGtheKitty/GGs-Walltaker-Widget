@@ -39,6 +39,8 @@ class WalltakerWebSocketService : Service() {
     override fun onDestroy() {
         subscriptions.values.forEach { it.webSocket.close(1000, "Service stopped") }
         subscriptions.clear()
+        GifWidgetAnimator.stopAll()
+        VideoWidgetAnimator.stopAll()
         client.dispatcher.executorService.shutdown()
         super.onDestroy()
     }

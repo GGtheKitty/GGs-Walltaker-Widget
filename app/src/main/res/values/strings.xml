@@ -21,12 +21,13 @@
   <string name="walltaker_url_title">Walltaker URL</string>
   <string name="default_walltaker_url">https://walltaker.joi.how</string>
   <string name="instructions">Instructions</string>
-  <string name="instructionslist">1. Add the Walltaker Widget to your home screen\n2. Enter your Link ID\n3. ... \n4. Profit!\n\n\nOpen the link URL by tapping on the widget\n\nYou can change the Walltaker URL using the wrench button\n\nMade by GGnoRE432</string>
+  <string name="instructionslist">1. Add the Walltaker Widget to your home screen\n2. Enter your Link ID\n3. &#8230; \n4. Profit!\n\n\nOpen the link URL by tapping on the widget\n\nYou can change the Walltaker URL using the wrench button\n\nMade by GGnoRE432</string>
   <string name="crop_to_fill">Crop to Fill</string>
   <string name="linkid">Link ID\nUse the value after https://walltaker.joi.how/links/</string>
   <string name="link_id_hint">Link ID</string>
   <string name="current_walltaker_image">Current Walltaker image</string>
   <string name="download_image">Download Image</string>
+  <string name="open_direct_link">Open Walltaker Link</string>
   <string name="save_widget_settings">Save Widget Settings</string>
   <string name="reaction_message_hint">Message</string>
   <string name="reaction_hate_it">Hate it</string>

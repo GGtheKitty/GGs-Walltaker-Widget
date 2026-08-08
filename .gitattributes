@@ -1,0 +1,8 @@
+.gitattributes text eol=lf
+*.gradle text eol=lf
+*.kt text eol=lf
+*.java text eol=lf
+*.xml text eol=lf
+*.properties text eol=lf
+*.md text eol=lf
+.gitignore text eol=lf

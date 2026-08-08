@@ -20,9 +20,27 @@ class ImageLookup {
             val currentImageUrl = Preferences.loadCurrentImgPref(context, appWidgetId)
             if (currentImageUrl.isEmpty()) {
                 Log.d("IMAGE_LOOKUP", "No Walltaker image cached yet for widget $appWidgetId.")
+                GifWidgetAnimator.stop(appWidgetId)
                 AppWidgetManager.getInstance(context).updateAppWidget(appWidgetId, views)
                 return
             }
+
+            if (GifWidgetAnimator.isAnimatedGif(currentImageUrl)) {
+                VideoWidgetAnimator.stop(appWidgetId)
+                AppWidgetManager.getInstance(context).updateAppWidget(appWidgetId, views)
+                GifWidgetAnimator.start(context, appWidgetId, currentImageUrl)
+                return
+            }
+
+            GifWidgetAnimator.stop(appWidgetId)
+
+            if (VideoWidgetAnimator.isAnimatedVideo(currentImageUrl)) {
+                AppWidgetManager.getInstance(context).updateAppWidget(appWidgetId, views)
+                VideoWidgetAnimator.start(context, appWidgetId, currentImageUrl)
+                return
+            }
+
+            VideoWidgetAnimator.stop(appWidgetId)
 
             val awt: AppWidgetTarget = object : AppWidgetTarget(context.applicationContext, R.id.imageView2, views, appWidgetId) {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
